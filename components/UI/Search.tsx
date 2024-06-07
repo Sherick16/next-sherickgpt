@@ -47,7 +47,7 @@ const Search = ({
       <button
         onClick={() => onSearch(inputRef.current?.value || "")}
         className={cn(
-          "absolute right-0 px-4 py-4 rounded-full bg-opacity-20 hover:bg-opacity-40 transition-all"
+          "absolute right-0 px-4 py-4 rounded-full bg-gray-400 bg-opacity-0 hover:bg-opacity-10 transition-all"
         )}
       >
         <MagnifyingGlassIcon className="w-6 h-6" />

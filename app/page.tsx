@@ -6,14 +6,18 @@ import Input from "@/components/UI/Input";
 import { GearIcon } from "@radix-ui/react-icons";
 import Avatar from "@/components/UI/Avatar";
 import Textarea from "@/components/UI/Textarea";
+import Tooltip from "@/components/UI/Tooltip";
 
 export default function Home() {
   return (
     <main className="flex flex-col items-center justify-between p-24 gap-4">
       <div className="grid grid-cols-5 gap-4">
-        <ActionButton variant="primary" icon={<GearIcon />}>
-          Primary
-        </ActionButton>
+        <Tooltip content="Tooltip content">
+          <ActionButton variant="primary" icon={<GearIcon />}>
+            Primary
+          </ActionButton>
+        </Tooltip>
+
         <ActionButton variant="secondary">Secondary</ActionButton>
         <ActionButton variant="danger">Danger</ActionButton>
         <ActionButton variant="warning">Warning</ActionButton>
