@@ -33,7 +33,7 @@ const Avatar = ({
   return (
     <div
       className={cn(
-        "rounded-full overflow-hidden",
+        "rounded-4xl overflow-hidden",
         sizeMap[size]?.styles || sizeMap["md"]?.styles,
         className
       )}

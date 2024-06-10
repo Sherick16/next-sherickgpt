@@ -45,7 +45,10 @@ export default function Home() {
         ]}
         onSelect={(value) => console.log(value)}
       />
-      <Search onSearch={(value) => console.log(value)} />
+      <div className="grid grid-cols-2 gap-4">
+        <Search onSearch={(value) => console.log(value)} />
+        <Search onSearch={(value) => console.log(value)} loading />
+      </div>
       <div className="grid grid-cols-2 gap-4">
         <Input
           placeholder="Input"

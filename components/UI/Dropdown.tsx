@@ -27,7 +27,7 @@ const Dropdown = ({
     >
       <button
         className={cn(
-          "px-6 py-4 rounded-full bg-opacity-20 hover:bg-opacity-40 border transition-all flex items-center justify-between  border-opacity-20  min-w-64",
+          "px-6 py-4 rounded-4xl bg-opacity-20 hover:bg-opacity-40 border transition-all flex items-center justify-between  border-opacity-20  min-w-64",
           styleMap?.[variant] || styleMap["primary"]
         )}
         onClick={() => setIsOpen(!isOpen)}

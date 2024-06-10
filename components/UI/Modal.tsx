@@ -23,27 +23,30 @@ const Modal = ({
   return (
     <>
       {isOpen && (
-        <div
-          className={cn(
-            "fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 animate-fade overflow-hidden",
-            className
-          )}
-          onClick={onClose}
-          {...props}
-        >
+        <>
           <div
-            className="relative w-full max-w-3xl p-8 bg-gray-600 bg-opacity-20 backdrop-blur-xl rounded-xl drop-shadow-lg animate-zoom"
-            onClick={(e) => e.stopPropagation()}
+            className={cn(
+              "fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30 animate-fade",
+              className
+            )}
+            onClick={onClose}
+            {...props}
           >
             <div
-              className="absolute z-50 top-8 right-8 cursor-pointer hover:bg-gray-700 rounded-full p-2 transition-all"
-              onClick={onClose}
+              className="relative w-full max-w-3xl p-8 bg-gray-600 bg-opacity-20 backdrop-blur-xl rounded-xl drop-shadow-lg animate-zoom"
+              onClick={(e) => e.stopPropagation()}
             >
-              <Cross2Icon className="w-6 h-6 text-gray-300" />
+              <div
+                className="absolute z-50 top-8 right-8 cursor-pointer hover:bg-gray-700 rounded-4xl p-2 transition-all"
+                onClick={onClose}
+              >
+                <Cross2Icon className="w-6 h-6 text-gray-300" />
+              </div>
+              {children}
             </div>
-            {children}
           </div>
-        </div>
+        </>
+
       )}
     </>
   );

@@ -21,8 +21,7 @@ import "prismjs/components/prism-sql";
 import "prismjs/components/prism-yaml";
 import "prismjs/themes/prism-tomorrow.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { ClipboardCopyIcon } from "@radix-ui/react-icons";
-import { cn } from "@/libs/utils";
+import { Copy } from "lucide-react";
 
 interface Props {
   inline?: any;
@@ -33,7 +32,6 @@ interface Props {
 
 const CodeBlock: React.FC<Props> = ({ inline, className, language, children, ...rest }) => {
   const [copied, setCopied] = useState(false);
-  const [open, setOpen] = useState(true);
 
   const onCopy = () => {
     setCopied(true);
@@ -54,31 +52,28 @@ const CodeBlock: React.FC<Props> = ({ inline, className, language, children, ...
   }
 
   return (
-    <div
-      className="bg-zinc-700 bg-opacity-40 text-white p-4 rounded-xl w-full overflow-auto my-2 relative w-full"
-    >
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex space-x-2 text-red-500">
-          <div className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 cursor-pointer" onClick={() => setOpen(!open)} />
-          <div className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600" onClick={() => setOpen(!open)} />
-          <div className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600" onClick={() => setOpen(true)} />
-        </div>
+    <>
+      {/* Top bar with rounded top left and right corners */}
+      <div className="bg-zinc-600 bg-opacity-40 text-white p-4 rounded-t-2xl flex justify-between overflow-auto mt-2 relative w-full">
+        {/* Copy button */}
+        <p className="text-gray-300">
+          {language}
+        </p>
         <CopyToClipboard text={String(children).replace(/\n$/, "")}>
           <button className="flex items-center space-x-2 text-gray-300 hover:text-white" onClick={onCopy}>
-            <ClipboardCopyIcon className="mr-2" />
+            <Copy className="mr-2" />
             {copied ? "copied!" : "copy"}
-            &nbsp;-&nbsp;{language}
           </button>
         </CopyToClipboard>
       </div>
-      {/* @ts-ignore */}
+      {/* Code block */}
       <Highlight
         code={String(children).replace(/\n$/, "")}
         language={language === "tsx" ? "jsx" : language}
         prism={Prism}
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre style={style} className={cn('p-4 rounded-xl', open ? "visible" : "invisible h-0 overflow-hidden p-0 px-4")} {...rest}>
+          <pre className="p-4 rounded-b-2xl border border-t-0 border-zinc-700 bg-zinc-800 bg-opacity-30 border-opacity-40" {...rest}>
             {tokens?.map((line, i) => (
               <div key={i} {...getLineProps({ line })}>
                 {line?.map((token, key) => (
@@ -89,7 +84,7 @@ const CodeBlock: React.FC<Props> = ({ inline, className, language, children, ...
           </pre>
         )}
       </Highlight>
-    </div>
+    </>
   );
 };
 
