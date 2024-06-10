@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { cn } from "@/utils/utils";
+import { cn } from "@/libs/utils";
 import NextImage from "next/image";
 
 const sizeMap: Record<"sm" | "md" | "lg", { element: number; styles: string }> =
@@ -29,16 +29,7 @@ const Avatar = ({
   alt: string;
   size?: "sm" | "md" | "lg";
   className?: string;
-  [key: string]: any;
 }) => {
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    const img = new Image();
-    img.src = src;
-    img.onload = () => setLoaded(true);
-  }, [src]);
-
   return (
     <div
       className={cn(
@@ -47,18 +38,14 @@ const Avatar = ({
         className
       )}
     >
-      {loaded ? (
-        <NextImage
-          src={src}
-          alt={alt}
-          className="object-cover w-full h-full bg-gray-400 animate-fade"
-          width={sizeMap[size]?.element || 64}
-          height={sizeMap[size]?.element || 64}
-          {...props}
-        />
-      ) : (
-        <div className="w-full h-full bg-gray-400 animate-pulse" />
-      )}
+      <NextImage
+        src={src}
+        alt={alt}
+        className="object-cover w-full h-full bg-gray-400"
+        width={sizeMap[size]?.element || 64}
+        height={sizeMap[size]?.element || 64}
+        {...props}
+      />
     </div>
   );
 };

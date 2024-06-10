@@ -1,4 +1,4 @@
-import { cn } from "@/utils/utils";
+import { cn } from "@/libs/utils";
 import { useRef } from "react";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { styleMap } from "./ui.common";

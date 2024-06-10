@@ -15,6 +15,10 @@ const config: Config = {
       },
       animation: {
         fade: "fadeIn 0.3s ease-in-out",
+        zoom: "zoomIn 0.3s ease-in-out",
+      },
+      borderRadius: {
+        "4xl": "2rem",
       },
 
       // that is actual animation
@@ -24,6 +28,16 @@ const config: Config = {
             opacity: 0,
           },
           "100%": {
+            opacity: 1,
+          },
+        },
+        zoomIn: {
+          "0%": {
+            transform: "scale(0)",
+            opacity: 0,
+          },
+          "100%": {
+            transform: "scale(1)",
             opacity: 1,
           },
         },

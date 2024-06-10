@@ -1,5 +1,5 @@
 import { ReactNode, useState, useEffect } from "react";
-import { cn } from "@/utils/utils";
+import { cn } from "@/libs/utils";
 
 const Tooltip = ({
   children,
@@ -31,14 +31,14 @@ const Tooltip = ({
   return (
     <div
       id="tooltip"
-      className={cn("relative inline-block", className)}
+      className={cn("relative inline-block w-full", className)}
       {...props}
     >
       {children}
       {show && (
         <div
           role="tooltip"
-          className="absolute z-10 p-2 mt-2 origin-top-right rounded-lg backdrop-blur-lg bg-gray-500 bg-opacity-20 shadow-xl border border-gray-400 border-opacity-20 text-sm animate-fade"
+          className="absolute z-10 p-2 mt-2 origin-top-right rounded-lg backdrop-blur-lg bg-gray-500 bg-opacity-20 shadow-lg text-sm animate-fade"
         >
           {content}
         </div>

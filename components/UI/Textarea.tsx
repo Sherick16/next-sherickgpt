@@ -1,5 +1,5 @@
 import { ReactNode, useState, useEffect } from "react";
-import { cn } from "@/utils/utils";
+import { cn } from "@/libs/utils";
 
 const Textarea = ({
   placeholder,

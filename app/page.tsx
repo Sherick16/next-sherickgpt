@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import ActionButton from "@/components/UI/ActionButton";
 import Dropdown from "@/components/UI/Dropdown";
 import Search from "@/components/UI/Search";
@@ -7,8 +8,14 @@ import { GearIcon } from "@radix-ui/react-icons";
 import Avatar from "@/components/UI/Avatar";
 import Textarea from "@/components/UI/Textarea";
 import Tooltip from "@/components/UI/Tooltip";
+import Modal from "@/components/UI/Modal";
+import Badge from "@/components/UI/Badge";
+import { Spinner } from "@/components/UI/Spinner";
+import Markdown from "@/components/UI/Markdown";
 
 export default function Home() {
+  const [open, setOpen] = useState(false);
+
   return (
     <main className="flex flex-col items-center justify-between p-24 gap-4">
       <div className="grid grid-cols-5 gap-4">
@@ -18,10 +25,17 @@ export default function Home() {
           </ActionButton>
         </Tooltip>
 
-        <ActionButton variant="secondary">Secondary</ActionButton>
+        <ActionButton loading variant="secondary">Secondary</ActionButton>
         <ActionButton variant="danger">Danger</ActionButton>
         <ActionButton variant="warning">Warning</ActionButton>
-        <ActionButton variant="success">Success</ActionButton>
+        <ActionButton variant="success" onClick={() => setOpen(true)}>Open Modal</ActionButton>
+      </div>
+      <div className="grid grid-cols-5 gap-4">
+        <Badge variant="primary">Primary</Badge>
+        <Badge variant="secondary">Secondary</Badge>
+        <Badge variant="danger">Danger</Badge>
+        <Badge variant="warning">Warning</Badge>
+        <Badge variant="success">Success</Badge>
       </div>
       <Dropdown
         options={[
@@ -50,7 +64,6 @@ export default function Home() {
         src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg"
         alt="Avatar"
         size="md"
-        priority={true}
       />
       <div className="grid grid-cols-3 gap-4">
         <h1>H1: Lorem ipsum</h1>
@@ -69,6 +82,34 @@ export default function Home() {
           culpa qui officia deserunt mollit anim id est laborum.
         </p>
       </div>
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <h1 className="mb-4">Modal</h1>
+        <p>
+            Paragraph: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+            enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+            ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+      </Modal>
+      <Spinner />
+      <Markdown>
+        {`
+          # Markdown
+
+          ## Lorem ipsum
+
+          Paragraph: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+          enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+          ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        `}
+      </Markdown>
     </main>
   );
 }

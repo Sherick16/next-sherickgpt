@@ -1,5 +1,5 @@
 import { ReactNode, useState } from "react";
-import { cn } from "@/utils/utils";
+import { cn } from "@/libs/utils";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { styleMap, bgMap, rowStyleMap } from "./ui.common";
 import { Variant } from "./ui.types";
