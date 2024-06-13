@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import dynamic from "next/dynamic";
 import "./globals.css";
+import SideNavWrapper from "@/components/Layout/SideNavWrapper";
+
+const SideNav = dynamic(() => import("@/components/Layout/SideNav"));
+const Container = dynamic(() => import("@/components/Layout/Container"));
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +21,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Container>
+          <SideNavWrapper />
+          {children}
+        </Container>
+      </body>
     </html>
   );
 }

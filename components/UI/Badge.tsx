@@ -19,7 +19,7 @@ const Badge = ({
     <div
       {...props}
       className={cn(
-        "px-2 py-2 rounded-4xl bg-opacity-20 hover:bg-opacity-40 transition-all flex items-center justify-center text-xs border border-opacity-20",
+        "px-2 py-2 rounded-4xl bg-opacity-20 hover:bg-opacity-40 transition-all flex items-center justify-center text-xs font-semibold",
         className,
         styleMap?.[variant] || styleMap["primary"]
       )}

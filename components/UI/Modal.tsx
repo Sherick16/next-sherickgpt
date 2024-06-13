@@ -33,7 +33,7 @@ const Modal = ({
             {...props}
           >
             <div
-              className="relative w-full max-w-3xl p-8 bg-gray-600 bg-opacity-20 backdrop-blur-xl rounded-xl drop-shadow-lg animate-zoom"
+              className="relative w-full max-w-3xl p-8 bg-gray-600 bg-opacity-20 backdrop-blur-xl rounded-xl drop-shadow-lg animate-zoom border border-gray-400 border-opacity-20"
               onClick={(e) => e.stopPropagation()}
             >
               <div

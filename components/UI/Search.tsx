@@ -35,13 +35,13 @@ const Search = ({
 
   return (
     <div
-      className={cn("relative inline-block text-left min-w-64", className)}
+      className={cn("relative inline-block text-left", className)}
       {...props}
     >
       <input
         ref={inputRef}
         className={cn(
-          "px-6 py-4 rounded-4xl bg-opacity-20 hover:bg-opacity-40 border transition-all w-64 border-opacity-20 focus:outline-none focus:border-opacity-50",
+          "px-6 py-4 rounded-4xl bg-opacity-20 hover:bg-opacity-40 border transition-all border-opacity-20 focus:outline-none focus:border-opacity-50",
           styleMap?.[variant] || styleMap["primary"],
           loading ? "cursor-not-allowed opacity-60" : "cursor-pointer"
         )}
