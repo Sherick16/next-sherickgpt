@@ -1,6 +1,6 @@
 import { cn } from "@/libs/utils";
 import { useRef } from "react";
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { Search as SearchIcon } from "lucide-react";
 import { styleMap } from "./ui.common";
 import { Variant } from "./ui.types";
 import { Spinner } from "./Spinner";
@@ -58,7 +58,7 @@ const Search = ({
         {loading ? (
           <Spinner className="w-6 h-6" />
         ) : (
-          <MagnifyingGlassIcon className="w-6 h-6" />
+          <SearchIcon className="w-6 h-6" />
         )}
       </button>
     </div>

@@ -4,7 +4,6 @@ import ActionButton from "@/components/UI/ActionButton";
 import Dropdown from "@/components/UI/Dropdown";
 import Search from "@/components/UI/Search";
 import Input from "@/components/UI/Input";
-import { GearIcon } from "@radix-ui/react-icons";
 import Avatar from "@/components/UI/Avatar";
 import Textarea from "@/components/UI/Textarea";
 import Tooltip from "@/components/UI/Tooltip";
@@ -19,6 +18,7 @@ import { Switch } from "@/components/UI/Switch";
 import { TabGroup } from "@/components/UI/TabGroup";
 import { Table } from "@/components/UI/Table";
 import { capitalize } from "@/libs/utils";
+import { Settings } from "lucide-react";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
@@ -41,7 +41,7 @@ export default function Home() {
             <Tooltip key={variant} content={`Tooltip content for ${variant}`}>
               <ActionButton
                 variant={variant}
-                icon={<GearIcon />}
+                icon={<Settings />}
                 onClick={() => setOpen(true)}
               >
                 {capitalize(variant)}

@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { cn } from "@/libs/utils";
-import { ChevronDownIcon } from "@radix-ui/react-icons";
+import { ChevronDown } from "lucide-react";
 import { styleMap, bgMap, rowStyleMap } from "./ui.common";
 import { Variant } from "./ui.types";
 
@@ -48,7 +48,7 @@ const Dropdown = ({
         onClick={() => setIsOpen(!isOpen)}
       >
         {selected || "Select an option"}
-        <ChevronDownIcon
+        <ChevronDown
           className={cn("w-5 h-5 ml-2", isOpen ? "transform rotate-180" : "")}
         />
       </button>
