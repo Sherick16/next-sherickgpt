@@ -1,6 +1,6 @@
 {
   "name": "sherick-ui",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A collection of UI components for React inspired by Material Design.",
   "keywords": [
     "react",
@@ -21,19 +21,29 @@
     "dist"
   ],
   "license": "MIT",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "dev": "next dev --turbo",
     "next:build": "next build",
     "build": "rollup -c",
+    "prebuild": "pnpm clean",
+    "build:watch": "rollup -c -w",
     "prepare": "pnpm build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean": "rimraf dist"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.390.0",
-    "next": "14.2.3",
     "prism-react-renderer": "^2.3.1",
     "prismjs": "^1.29.0",
     "react-markdown": "^9.0.1",
@@ -52,15 +62,18 @@
     "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-typescript": "^12.1.2",
+    "@size-limit/preset-small-lib": "^11.1.6",
     "@types/node": "^20",
     "@types/prismjs": "^1.26.4",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
+    "next": "14.2.3",
     "postcss": "^8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "rimraf": "^6.0.1",
     "rollup": "^4.29.1",
     "rollup-plugin-dts": "^6.1.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
@@ -72,5 +85,15 @@
   "peerDependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
-  }
+  },
+  "size-limit": [
+    {
+      "path": "dist/index.cjs.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/index.esm.js",
+      "limit": "10 KB"
+    }
+  ]
 }
