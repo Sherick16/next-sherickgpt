@@ -1,6 +1,6 @@
 {
   "name": "sherick-ui",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "A collection of UI components for React inspired by Material Design.",
   "keywords": [
     "react",
@@ -30,7 +30,7 @@
     }
   },
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "next:build": "next build",
     "build": "rollup -c",
     "prebuild": "pnpm clean",
@@ -71,20 +71,15 @@
     "eslint-config-next": "14.2.3",
     "next": "14.2.3",
     "postcss": "^8",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "rimraf": "^6.0.1",
     "rollup": "^4.29.1",
     "rollup-plugin-dts": "^6.1.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-visualizer": "^5.13.1",
     "tailwindcss": "^3.4.1",
     "tslib": "^2.8.1",
     "typescript": "^5"
-  },
-  "peerDependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
   },
   "size-limit": [
     {

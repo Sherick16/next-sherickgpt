@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { cn } from "@/libs/utils";
 import { styleMap } from "./ui.common";
 import { Variant } from "./ui.types";
@@ -31,7 +31,11 @@ const ActionButton = ({
       )}
       onClick={onClick}
     >
-      {icon && !loading ? <span className="mr-2 inline-block align-middle">{icon}</span> : loading ? <Spinner className="mr-2" size="small" /> : null}
+      {icon && !loading ? (
+        <span className="mr-2 inline-block align-middle">{icon}</span>
+      ) : loading ? (
+        <Spinner className="mr-2" size="small" />
+      ) : null}
       {children}
     </button>
   );

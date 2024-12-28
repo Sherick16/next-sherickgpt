@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { cn } from "@/libs/utils";
 import { bgMap } from "./ui.common";
 import { Variant } from "./ui.types";

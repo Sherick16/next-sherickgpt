@@ -1,5 +1,5 @@
+import React, { useRef } from "react";
 import { cn } from "@/libs/utils";
-import { useRef } from "react";
 import { Search as SearchIcon } from "lucide-react";
 import { styleMap } from "./ui.common";
 import { Variant } from "./ui.types";

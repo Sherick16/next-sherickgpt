@@ -1,4 +1,4 @@
-import { ReactNode, useState, useEffect, useId } from "react";
+import React, { ReactNode, useState, useEffect, useId } from "react";
 import { cn } from "@/libs/utils";
 
 const Tooltip = ({

@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { cn } from "@/libs/utils";
 import { styleMap } from "./ui.common";
 import { Variant } from "./ui.types";

@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { cn } from "@/libs/utils";
 import { ChevronDown } from "lucide-react";
 import { styleMap, bgMap, rowStyleMap } from "./ui.common";

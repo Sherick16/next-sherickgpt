@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { cn } from "@/libs/utils";
 
 const Textarea = ({

@@ -1,3 +1,4 @@
+import React from "react";
 import { cn } from "@/libs/utils";
 
 export const Skeleton = ({ className, ...props }: { className?: string }) => {

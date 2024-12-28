@@ -6,8 +6,22 @@ import { dts } from 'rollup-plugin-dts';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import pkg from './package.json' assert { type: 'json' };
+import { visualizer } from 'rollup-plugin-visualizer';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
+
+const makeExternalPredicate = (externalArr) => {
+  if (externalArr.length === 0) return () => false;
+  const pattern = new RegExp(`^(${externalArr.join('|')})($|/)`);
+  return (id) => pattern.test(id);
+};
+
+const external = [
+  ...Object.keys(pkg.dependencies || {}),
+  ...Object.keys(pkg.peerDependencies || {}),
+  ...Object.keys(pkg.devDependencies || {}),
+  'react/jsx-runtime'  // Important for React 17+
+];
 
 const config = [
   {   
@@ -16,39 +30,59 @@ const config = [
       {
         file: pkg.main,
         format: 'cjs',
-        sourcemap: true,
+        sourcemap: false,
       },
       {
         file: pkg.module,
         format: 'esm',
-        sourcemap: true,
+        sourcemap: false,
       },
     ],
     plugins: [
       peerDepsExternal(),
-      nodeResolve({ extensions }),
-      commonjs(),
+      nodeResolve({ 
+        extensions,
+        preferBuiltins: true,
+      }),
+      commonjs({
+        exclude: 'app/**',
+      }),
       typescript({
         tsconfig: './tsconfig.json',
         declaration: true,
         declarationDir: 'dist',
         exclude: ['**/*.test.tsx', '**/*.test.ts', '**/*.stories.tsx'],
+        compilerOptions: {
+          sourceMap: false,
+        },
       }),
       babel({
         extensions,
         babelHelpers: 'bundled',
         exclude: 'node_modules/**',
+        presets: [
+          ['@babel/preset-env', { modules: false }],
+          '@babel/preset-react',
+          '@babel/preset-typescript'
+        ],
       }),
       postcss({
         minimize: true,
         modules: true,
         extract: false,
+        inject: false,
       }),
+      visualizer({
+        filename: 'bundle-analysis.html',
+        open: true
+      })
     ],
-    external: [
-      ...Object.keys(pkg.dependencies || {}),
-      ...Object.keys(pkg.peerDependencies || {}),
-    ],
+    external: makeExternalPredicate(external),
+    treeshake: {
+      moduleSideEffects: false,
+      propertyReadSideEffects: false,
+      tryCatchDeoptimization: false
+    },
   },
   {
     input: 'app/index.ts',

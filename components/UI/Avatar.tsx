@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React from "react";
 import { cn } from "@/libs/utils";
 import NextImage from "next/image";
 
