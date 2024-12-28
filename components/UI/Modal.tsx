@@ -1,55 +1,103 @@
-import { ReactNode, useState, useEffect } from "react";
-import { cn } from "@/libs/utils";
-import { Cross2Icon } from "@radix-ui/react-icons";
+"use client";
 
-const Modal = ({
-  children,
-  open,
-  onClose,
-  className,
-  ...props
-}: {
+import { ReactNode, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
+import { cn } from "@/libs/utils";
+import { X } from "lucide-react";
+import { ModalContent } from "./ModalContent";
+import { ModalFooter } from "./ModalFooter";
+import { ModalHeader } from "./ModalHeader";
+
+export interface ModalProps {
   children: ReactNode;
   open: boolean;
   onClose: () => void;
   className?: string;
-}) => {
-  const [isOpen, setIsOpen] = useState(open);
+}
+
+export default function Modal({
+  children,
+  open,
+  onClose,
+  className,
+}: ModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
+  const previouslyFocusedElement = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    setIsOpen(open);
-  }, [open]);
+    if (open) {
+      previouslyFocusedElement.current = document.activeElement as HTMLElement;
+      document.body.style.overflow = "hidden";
 
-  return (
-    <>
-      {isOpen && (
-        <>
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === "Escape") {
+          onClose();
+        }
+      };
+
+      document.addEventListener("keydown", handleKeyDown);
+      modalRef.current?.focus(); // Ensure the modal gets focus.
+
+      return () => {
+        document.removeEventListener("keydown", handleKeyDown);
+        document.body.style.overflow = "unset";
+        previouslyFocusedElement.current?.focus(); // Restore focus.
+      };
+    }
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return createPortal(
+    <div
+      className="fixed inset-0 z-50"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      aria-describedby="modal-description"
+      onClick={onClose}
+    >
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black/50" />
+
+      {/* Modal */}
+      <div className="absolute inset-0 overflow-y-auto">
+        <div className="min-h-full flex items-center justify-center p-4">
           <div
+            ref={modalRef}
+            tabIndex={-1} // Make the modal focusable.
             className={cn(
-              "fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30 animate-fade",
+              "relative w-full max-w-xl bg-zinc-800/80 backdrop-blur-xl",
+              "rounded-3xl shadow-xl border border-gray-700/50",
+              "transform transition-all duration-200",
+              "animate-in fade-in zoom-in-95",
               className
             )}
-            onClick={onClose}
-            {...props}
+            onClick={(e) => e.stopPropagation()}
           >
-            <div
-              className="relative w-full max-w-3xl p-8 bg-gray-600 bg-opacity-20 backdrop-blur-xl rounded-xl drop-shadow-lg animate-zoom border border-gray-400 border-opacity-20"
-              onClick={(e) => e.stopPropagation()}
+            {/* Close button */}
+            <button
+              onClick={onClose}
+              className={cn(
+                "absolute right-4 top-4 p-2 rounded-full",
+                "text-gray-400 hover:text-gray-200",
+                "bg-gray-700/50 hover:bg-gray-600/50",
+                "transition-colors"
+              )}
             >
-              <div
-                className="absolute z-50 top-8 right-8 cursor-pointer hover:bg-gray-700 rounded-4xl p-2 transition-all"
-                onClick={onClose}
-              >
-                <Cross2Icon className="w-6 h-6 text-gray-300" />
-              </div>
-              {children}
-            </div>
-          </div>
-        </>
+              <X className="w-4 h-4" />
+              <span className="sr-only">Close</span>
+            </button>
 
-      )}
-    </>
+            {children}
+          </div>
+        </div>
+      </div>
+    </div>,
+    document.body
   );
 }
 
-export default Modal;
+Modal.Header = ModalHeader;
+Modal.Content = ModalContent;
+Modal.Footer = ModalFooter;

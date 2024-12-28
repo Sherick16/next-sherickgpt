@@ -1,4 +1,6 @@
-import { ReactNode, useState, useEffect } from "react";
+"use client";
+
+import { ReactNode, useRef, useEffect } from "react";
 import { cn } from "@/libs/utils";
 
 const Textarea = ({
@@ -19,10 +21,11 @@ const Textarea = ({
   required?: boolean;
   error?: boolean;
 }) => {
-  const [value, setValue] = useState(defaultValue || "");
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    if (defaultValue) setValue(defaultValue || "");
+    if (defaultValue && textareaRef.current)
+      textareaRef.current.value = defaultValue;
   }, [defaultValue]);
 
   return (
@@ -34,6 +37,7 @@ const Textarea = ({
         </label>
       )}
       <textarea
+        ref={textareaRef}
         className={cn(
           "px-4 py-4 rounded-lg bg-opacity-20 hover:bg-opacity-40 border transition-all min-w-64 h-min min-h-16 w-full border-opacity-20 focus:outline-none focus:border-opacity-50",
           !error
@@ -41,9 +45,7 @@ const Textarea = ({
             : "border-red-500 border-opacity-40 focus:border-opacity-100 text-red-400 bg-red-500 bg-opacity-10 hover:bg-opacity-20 hover:bg-red-500"
         )}
         placeholder={placeholder}
-        value={value}
         onChange={(e) => {
-          setValue(e.target.value);
           onChange && onChange(e.target.value);
         }}
       />

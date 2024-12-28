@@ -21,7 +21,6 @@ const config: Config = {
         "4xl": "2rem",
       },
 
-      // that is actual animation
       keyframes: (theme: any) => ({
         fadeIn: {
           "0%": {

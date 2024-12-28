@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { cn } from "@/libs/utils";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { styleMap, bgMap, rowStyleMap } from "./ui.common";
@@ -20,6 +20,21 @@ const Dropdown = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    // When escape key is pressed, close the dropdown.
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   return (
     <div
       className={cn("relative inline-block text-left min-w-64", className)}
@@ -40,7 +55,7 @@ const Dropdown = ({
       {isOpen && (
         <div
           className={cn(
-            "absolute z-10 backdrop-blur-lg w-full p-2 mt-2 origin-top-right rounded-3xl bg-opacity-20 shadow-lg ring-1 ring-black ring-opacity-5 border border-opacity-30",
+            "absolute z-30 backdrop-blur-lg w-full p-2 mt-2 origin-top-right rounded-3xl bg-opacity-20 shadow-lg ring-1 ring-black ring-opacity-5 border border-opacity-30",
             bgMap?.[variant] || bgMap["primary"]
           )}
           role="menu"
@@ -75,7 +90,7 @@ const Dropdown = ({
       )}
       {isOpen && (
         <div
-          className="fixed inset-0 z-0"
+          className="fixed inset-0 z-20"
           onClick={() => setIsOpen(false)}
         ></div>
       )}
